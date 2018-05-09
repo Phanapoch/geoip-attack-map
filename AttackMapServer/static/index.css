@@ -1,3 +1,15 @@
+
+    @font-face {
+        font-family: 'SpaceAgeRegular';
+        src: url('fonts/SpaceAgeRegular.eot');
+        src: local('SpaceAge Regular'), local('SpaceAge'), url('fonts/SpaceAgeRegular.ttf') format('truetype');
+    }
+    @font-face {
+        font-family: 'Nasalization';
+        src: url('fonts/nasalization-rg.eot');
+        src: local('Nasalization Regular'), local('Nasalization'), url('fonts/nasalization-rg.ttf') format('truetype');
+    }
+
     html {
         background:black;
     }
@@ -55,7 +67,7 @@
     #informIP h3{
         font-size:1.4em;
         padding:0px;
-	color:#ffffff;        
+        color:#ffffff;        
     }
 
     .container-fluid {
@@ -65,6 +77,7 @@
         bottom:3.5%;
         background:black;
         opacity:0.7;
+        font-family: 'Nasalization', Arial, sans-serif;
     }
     .row {
         height:100%;

@@ -199,7 +199,7 @@ map.on('ready', function() {
                 d3.select(this)
                     .transition()
                     .duration(100)
-                    .style('opacity', 0)
+                    .style('opacity', 1)
                     .remove();
         });
     }

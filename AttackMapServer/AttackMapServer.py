@@ -20,22 +20,22 @@ from sys import exit
 
 # Look up service colors
 service_rgb = {
-                'FTP':'#ff0000',
-                'SSH':'#ff8000',
-                'TELNET':'#ffff00',
-                'EMAIL':'#80ff00',
-                'WHOIS':'#00ff00',
-                'DNS':'#00ff80',
-                'HTTP':'#00ffff',
-                'HTTPS':'#0080ff',
-                'SQL':'#0000ff',
-                'SNMP':'#8000ff',
-                'SMB':'#bf00ff',
-                'AUTH':'#ff00ff',
-                'RDP':'#ff0060',
-                'DoS':'#ff0000',
-                'ICMP':'#ffcccc',
-                'OTHER':'#6600cc'
+                'FTP':'#03A9F4',
+                'SSH':'#B3E5FC',
+                'TELNET':'#81D4FA',
+                'EMAIL':'#4FC3F7',
+                'WHOIS':'#29B6F6',
+                'DNS':'#03A9F4',
+                'HTTP':'#039BE5',
+                'HTTPS':'#0288D1',
+                'SQL':'#0277BD',
+                'SNMP':'#01579B',
+                'SMB':'#80D8FF',
+                'AUTH':'#40C4FF',
+                'RDP':'#00B0FF',
+                'DoS':'#0091EA',
+                'ICMP':'#B3E5FC',
+                'OTHER':'#F5F5F5'
                 }
 
 
@@ -165,7 +165,7 @@ class WebSocketChatHandler(tornado.websocket.WebSocketHandler):
         if protocol:
             color = service_rgb[protocol]
         else:
-            color = '#000000'
+            color = '#E0E0E0'
         if 'event_count' in json_data:
             event_count = json_data['event_count']
         else:

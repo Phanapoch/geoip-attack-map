@@ -291,7 +291,7 @@ def main():
             where = syslog_file.tell()
             line = syslog_file.readline()
             if not line:
-                sleep(.05)
+                sleep(.1)
                 syslog_file.seek(where)
             else:
                 syslog_data_dict = parse_syslog(line)
