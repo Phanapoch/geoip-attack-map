@@ -37,7 +37,7 @@ db_path = '../DataServerDB/GeoLite2-City.mmdb'
 #log_file_out = '/var/log/map_data_server.out'
 
 # ip for headquarters
-hq_ip = '8.8.8.8'
+# hq_ip = '8.8.8.8'
 
 # stats
 server_start_time = strftime("%d-%m-%Y %H:%M:%S", localtime()) # local time
@@ -133,8 +133,7 @@ def find_hq_lat_long(hq_ip):
                 }
         return hq_dict
     else:
-        print('Please provide a valid IP address for headquarters')
-        exit()
+        return None
 
 
 def parse_maxminddb(db_path, ip):
@@ -283,7 +282,7 @@ def main():
     redis_instance = connect_redis(redis_ip)
 
     # Find HQ lat/long
-    hq_dict = find_hq_lat_long(hq_ip)
+    # hq_dict = find_hq_lat_long(hq_ip)
 
     # Follow/parse/format/publish syslog data
     with io.open(syslog_path, "r", encoding='ISO-8859-1') as syslog_file:
@@ -298,6 +297,9 @@ def main():
                 syslog_data_dict = parse_syslog(line)
                 if syslog_data_dict:
                     ip_db_unclean = parse_maxminddb(db_path, syslog_data_dict['src_ip'])
+                    hq_dict = find_hq_lat_long(syslog_data_dict['dst_ip'])
+                    if hq_dict == None:
+                        continue
                     if ip_db_unclean:
                         event_count += 1
                         ip_db_clean = clean_db(ip_db_unclean)

@@ -4,29 +4,32 @@
 // - AttackMapServer machine:
 //   - Internal IP: 127.0.0.1
 //   - External IP: 192.168.11.106
-var webSock = new WebSocket("ws:/127.0.0.1:8888/websocket"); // Internal
+var webSock = new WebSocket("ws:/203.144.234.43:8888/websocket"); // Internal
 //var webSock = new WebSocket("ws:/192.168.1.100:8888/websocket"); // External
 
 // link map
 
-L.mapbox.accessToken = "pk.eyJ1IjoibW1heTYwMSIsImEiOiJjaWgyYWU3NWQweWx2d3ltMDl4eGk5eWY1In0.9YoOkALPP7zaoim34ZITxw";
+L.mapbox.accessToken = "";
 var map = L.mapbox.map("map", "mapbox.dark", {
 center: [0, 0], // lat, long
 zoom: 2
 });
 
+var styleLayer = L.mapbox.styleLayer("mapbox://styles/phanapoch/cjgxhmwlv006m2rogbgbx7mpt")
+    .addTo(map);
+
 // add full screen option
 L.control.fullscreen().addTo(map);
 
 // hq coords
-var hqLatLng = new L.LatLng(37.3845, -122.0881);
+// var hqLatLng = new L.LatLng(37.3845, -122.0881);
 
 // hq marker
-L.circle(hqLatLng, 110000, {
-color: 'red',
-fillColor: 'yellow',
-fillOpacity: 0.5,
-}).addTo(map);
+// L.circle(hqLatLng, 110000, {
+// color: 'red',
+// fillColor: 'yellow',
+// fillOpacity: 0.5,
+// }).addTo(map);
 
 // Append <svg> to map
 var svg = d3.select(map.getPanes().overlayPane).append("svg")
@@ -165,7 +168,7 @@ function handleTraffic(msg, srcPoint, hqPoint) {
         return;
     }
 
-    var circleRadius = 6
+    var circleRadius = 3
 
     // Circle follows the line
     var dot = svg.append('circle')
@@ -194,7 +197,7 @@ function handleTraffic(msg, srcPoint, hqPoint) {
         .each('end', function() {
             d3.select(this)
                 .transition()
-                .duration(100)
+                .duration(500)
                 .style('opacity', 0)
                 .remove();
     });
@@ -208,7 +211,7 @@ function addCircle(msg, srcLatLng) {
     circleArray = circles.getLayers();
 
     // Only allow 50 circles to be on the map at a time
-    if (circleCount >= 50) {
+    if (circleCount >= 100) {
         circles.removeLayer(circleArray[0]);
     }
 
@@ -456,9 +459,10 @@ webSock.onmessage = function (e) {
         console.log(msg);
         switch(msg.type) {
         case "Traffic":
-            console.log("Traffic!");
+            //console.log("Traffic!");
             var srcLatLng = new L.LatLng(msg.src_lat, msg.src_long);
-            var hqPoint = map.latLngToLayerPoint(hqLatLng);
+            var dstLatLng = new L.LatLng(msg.dst_lat, msg.dst_long);
+            var hqPoint = map.latLngToLayerPoint(dstLatLng);
             var srcPoint = map.latLngToLayerPoint(srcLatLng);
             console.log('');
             addCircle(msg, srcLatLng);

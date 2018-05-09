@@ -33,8 +33,8 @@ def main():
                                                             random.randrange(1, 256),
                                                             port,
                                                             port,
-                                                            type_attack,
-                                                            cve_attack
+                                                            "HTTP",
+                                                            "P2P"
                                                             )
 
         syslog.syslog(rand_data)
