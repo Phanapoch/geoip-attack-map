@@ -34,12 +34,11 @@ L.control.fullscreen().addTo(map);
 
 // Append <svg> to map
 var svg = d3.select(map.getPanes().overlayPane)
-.classed("svg-container", true)
 .append("svg")
+.classed("svg-container", true)
 .attr("class", "leaflet-zoom-animated")
 .attr("width", window.innerWidth)
-.attr("height", window.innerHeight)
-.classed("svg-content-responsive", true); 
+.attr("height", window.innerHeight);
 
 // Append <g> to svg
 //var g = svg.append("g").attr("class", "leaflet-zoom-hide");
