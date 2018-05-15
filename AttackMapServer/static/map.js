@@ -33,10 +33,13 @@ L.control.fullscreen().addTo(map);
 // }).addTo(map);
 
 // Append <svg> to map
-var svg = d3.select(map.getPanes().overlayPane).append("svg")
+var svg = d3.select(map.getPanes().overlayPane)
+.classed("svg-container", true)
+.append("svg")
 .attr("class", "leaflet-zoom-animated")
 .attr("width", window.innerWidth)
-.attr("height", window.innerHeight);
+.attr("height", window.innerHeight)
+.classed("svg-content-responsive", true); 
 
 // Append <g> to svg
 //var g = svg.append("g").attr("class", "leaflet-zoom-hide");
@@ -89,7 +92,7 @@ function calcMidpoint(x1, y1, x2, y2, bend) {
     var m1 = (x1+x2)/2;
     var m2 = (y1+y2)/2;
 
-    var min = 2.5, max = 5.5;
+    var min = 2, max = 2.2;
     //var min = 1, max = 7;
     var arcIntensity = parseFloat((Math.random() * (max - min) + min).toFixed(2));
 
@@ -198,8 +201,8 @@ function handleTraffic(msg, srcPoint, hqPoint) {
         .each('end', function() {
             d3.select(this)
                 .transition()
-                .duration(100)
-                .style('opacity', 1)
+                .duration(1000)
+                .style('opacity', 0.1)
                 .remove();
     });
 }
@@ -212,7 +215,7 @@ function addCircle(msg, srcLatLng) {
     circleArray = circles.getLayers();
 
     // Only allow 50 circles to be on the map at a time
-    if (circleCount >= 50) {
+    if (circleCount >= 100) {
         circles.removeLayer(circleArray[0]);
     }
 
