@@ -22,16 +22,6 @@ var styleLayer = L.mapbox.styleLayer("mapbox://styles/phanapoch/cjgyrstr7008w2ro
 // add full screen option
 L.control.fullscreen().addTo(map);
 
-// hq coords
-// var hqLatLng = new L.LatLng(37.3845, -122.0881);
-
-// hq marker
-// L.circle(hqLatLng, 110000, {
-// color: 'red',
-// fillColor: 'yellow',
-// fillOpacity: 0.5,
-// }).addTo(map);
-
 // Append <svg> to map
 var svg = d3.select(map.getPanes().overlayPane)
 .append("svg")
@@ -145,15 +135,15 @@ function handleParticle(msg, srcPoint) {
     //d3.event.preventDefault();
 }
 
-function handleTraffic(msg, srcPoint, hqPoint) {
+function handleTraffic(msg, srcPoint, dstPoint) {
     var fromX = srcPoint['x'];
     var fromY = srcPoint['y'];
-    var toX = hqPoint['x'];
-    var toY = hqPoint['y'];
+    var toX = dstPoint['x'];
+    var toY = dstPoint['y'];
     var bendArray = [true, false];
     var bend = bendArray[Math.floor(Math.random() * bendArray.length)];
 
-    var lineData = [srcPoint, calcMidpoint(fromX, fromY, toX, toY, bend), hqPoint]
+    var lineData = [srcPoint, calcMidpoint(fromX, fromY, toX, toY, bend), dstPoint]
     var lineFunction = d3.svg.line()
         .interpolate("basis")
         .x(function(d) {return d.x;})
@@ -214,14 +204,14 @@ function addCircle(msg, srcLatLng) {
     circleArray = circles.getLayers();
 
     // Only allow 50 circles to be on the map at a time
-    if (circleCount >= 100) {
+    if (circleCount >= 50) {
         circles.removeLayer(circleArray[0]);
     }
 
-    L.circle(srcLatLng, 50000, {
+    L.circle(srcLatLng, 2000, {
         color: msg.color,
         fillColor: msg.color,
-        fillOpacity: 0.2,
+        fillOpacity: 0.1,
         }).addTo(circles);
     }
 
@@ -465,12 +455,12 @@ webSock.onmessage = function (e) {
             //console.log("Traffic!");
             var srcLatLng = new L.LatLng(msg.src_lat, msg.src_long);
             var dstLatLng = new L.LatLng(msg.dst_lat, msg.dst_long);
-            var hqPoint = map.latLngToLayerPoint(dstLatLng);
+            var dstPoint = map.latLngToLayerPoint(dstLatLng);
             var srcPoint = map.latLngToLayerPoint(srcLatLng);
             // console.log('');
             addCircle(msg, srcLatLng);
             handleParticle(msg, srcPoint);
-            handleTraffic(msg, srcPoint, hqPoint, srcLatLng);
+            handleTraffic(msg, srcPoint, dstPoint, srcLatLng);
             handleLegend(msg);
             handleLegendType(msg)
             break;
