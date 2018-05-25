@@ -180,6 +180,16 @@ def parse_syslog(line):
                     }
         return data_dict
 
+def reset_all_data():
+    global continents_tracked, countries_tracked, ips_tracked, postal_codes_tracked, event_count, unknown, ip_to_code, country_to_code
+
+    event_count = 0
+    continents_tracked = {}
+    countries_tracked = {}
+    country_to_code = {}
+    ip_to_code = {}
+    ips_tracked = {}
+    unknowns = {}
 
 def shutdown_and_report_stats():
     print('\nSHUTTING DOWN')
@@ -288,6 +298,9 @@ def main():
     with io.open(syslog_path, "r", encoding='ISO-8859-1') as syslog_file:
         syslog_file.readlines()
         while True:
+            if event_count > 50000:
+                print("reset data...")
+                reset_all_data()
             where = syslog_file.tell()
             line = syslog_file.readline()
             if not line:
