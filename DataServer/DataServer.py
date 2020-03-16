@@ -278,10 +278,10 @@ def track_stats(super_dict, tracking_dict, key):
 
 
 def main():
-    if getuid() != 0:
-        print('Please run this script as root')
-        print('SHUTTING DOWN')
-        exit()
+    #if getuid() != 0:
+    #    print('Please run this script as root')
+    #    print('SHUTTING DOWN')
+    #    exit()
 
     global db_path, log_file_out, redis_ip, redis_instance, syslog_path, hq_ip
     global continents_tracked, countries_tracked, ips_tracked, postal_codes_tracked, event_count, unknown, ip_to_code, country_to_code
