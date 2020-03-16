@@ -20,24 +20,26 @@ from sys import exit
 
 # Look up service colors
 service_rgb = {
-                'FTP':'#03A9F4',
-                'SSH':'#B3E5FC',
-                'TELNET':'#81D4FA',
-                'EMAIL':'#4FC3F7',
-                'WHOIS':'#29B6F6',
-                'DNS':'#03A9F4',
-                'HTTP':'#039BE5',
-                'HTTPS':'#0288D1',
-                'SQL':'#0277BD',
-                'SNMP':'#01579B',
-                'SMB':'#80D8FF',
-                'AUTH':'#40C4FF',
-                'RDP':'#00B0FF',
-                'DoS':'#0091EA',
-                'ICMP':'#B3E5FC',
+                '3HD':'#03A9F4',
+                'MONO29':'#B3E5FC',
+                'THAIRATH':'#81D4FA',
+                'TPBS':'#4FC3F7',
+                'WORKPOINT':'#29B6F6',
+                'AMARIN':'#03A9F4',
+                'GMMONE':'#039BE5',
+                'CH8':'#0288D1',
+                'NATION':'#0277BD',
+                'TV5':'#01579B',
+                'MCOT':'#80D8FF',
+                'CH7':'#40C4FF',
+                'NBT':'#00B0FF',
+                'PPTV':'#0091EA',
+                'TNN24':'#B3E5FC',
+                'NEWTV':'#F5F5F5',
+                'TRUE4U':'#0288D1',
+                'GMM25':'#039BE5',
                 'OTHER':'#F5F5F5'
                 }
-
 
 class IndexHandler(tornado.web.RequestHandler):
     @tornado.web.asynchronous

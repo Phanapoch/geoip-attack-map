@@ -31,7 +31,7 @@ redis_instance = None
 # required input paths
 syslog_path = '/var/log/syslog'
 #syslog_path = '/var/log/reverse-proxy.log'
-db_path = '../DataServerDB/GeoLite2-City.mmdb'
+db_path = '/home/localadmin/geoip-attack-map/DataServerDB/GeoLite2-City.mmdb'
 
 # file to log data
 #log_file_out = '/var/log/map_data_server.out'
@@ -298,13 +298,13 @@ def main():
     with io.open(syslog_path, "r", encoding='ISO-8859-1') as syslog_file:
         syslog_file.readlines()
         while True:
-            if event_count > 50000:
-                print("reset data...")
-                reset_all_data()
+            #if event_count > 2000:
+            #    print("reset data...")
+            #    reset_all_data()
             where = syslog_file.tell()
             line = syslog_file.readline()
             if not line:
-                sleep(.2)
+                sleep(.25)
                 syslog_file.seek(where)
             else:
                 syslog_data_dict = parse_syslog(line)

@@ -36,7 +36,7 @@ META = [{
         'path': ['code'],
         }]
 
-PORTMAP = {
+PORTMAP_OLD = {
      0:"DoS",        # Denial of Service
     1:"ICMP",        # ICMP
     20:"FTP",        # FTP Data
@@ -69,4 +69,25 @@ PORTMAP = {
     5902:"RDP",      # VNC:2
     5903:"RDP",      # VNC:3
     8080:"HTTP",     # HTTP Alternative
+}
+
+PORTMAP = {
+    33:"3HD",
+    29:"MONO29", 
+    32:"THAIRATH",
+    3:"TPBS",
+    23:"WORKPOINT",
+    34:"AMARIN",
+    31:"GMMONE",
+    27:"CH8",
+    22:"NATION",
+    1:"TV5",
+    30:"MCOT",
+    35:"CH7",
+    2:"NBT",
+    36:"PPTV",
+    16:"TNN24",
+    18:"NEWTV",
+    24:"TRUE4U",
+    25:"GMM25",
 }
